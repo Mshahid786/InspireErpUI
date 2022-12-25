@@ -1,0 +1,115 @@
+<app-page-header [nav]='breadcumbmodel' [title]='title'></app-page-header>
+<div class="card card-w-title" [formGroup]='locationFormGroup'>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Location Name</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Location Name" formControlName='locationMasterLocationName'>
+
+            <div class="error" *ngIf="f.locationMasterLocationName.errors 
+            && (f.locationMasterLocationName.dirty || f.locationMasterLocationName.touched)">
+                <span *ngIf="f.locationMasterLocationName.errors.required">
+                    Location Name is Mandatory Field*</span>
+            </div>
+
+        </div>
+   
+        <div class="p-col-12 p-md-12 p-lg-1">Address</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText  placeholder="Address" formControlName='locationMasterLocationAddress'>
+            <div class="error" *ngIf="f.locationMasterLocationAddress.errors 
+            && (f.locationMasterLocationAddress.dirty || f.locationMasterLocationAddress.touched)">
+                <span *ngIf="f.locationMasterLocationAddress.errors.required">Address is Mandatory Field*</span>
+            </div>
+        </div>
+    </div>
+
+  <div class="p-grid">
+    
+        <div class="p-col-12 p-md-12 p-lg-1">Telephone</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Telephone" formControlName='locationMasterLocationTelephone'>
+
+            <div class="error" *ngIf="f.locationMasterLocationTelephone.errors 
+            && (f.locationMasterLocationTelephone.dirty || f.locationMasterLocationTelephone.touched)">
+                <span *ngIf="f.locationMasterLocationTelephone.errors.required">Telephone is Mandatory
+                    Field*</span>
+            </div>
+        </div>
+            <div class="p-col-12 p-md-12 p-lg-1">Fax</div>
+            <div class="p-col-12 p-md-12 p-lg-2">
+                <input pInputText placeholder="Fax" formControlName='locationMasterLocationFax'>
+                <div class="error" *ngIf="f.locationMasterLocationFax.errors 
+                && (f.locationMasterLocationFax.dirty || f.locationMasterLocationFax.touched)">
+                    <span *ngIf="f.locationMasterLocationFax.errors.required">Fax is Mandatory
+                        Field*</span>
+                </div>
+    
+            </div>
+        
+        <div class="p-col-8 p-md-8 p-lg-1"style="width:65px">In-Active</div>
+        <div class="p-col-8 p-md-8 p-lg-1">
+            <p-checkbox [formControl]="locationFormGroup.controls['locationMasterLocationStatus']" [binary]="true" style="height: 18px;width: 18px;">  </p-checkbox>
+        </div>
+        
+    </div>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-offset-1 p-lg-6">
+            <button pButton class="ui-button-info" [label]='btnlabel' (click)='saveLocation()'></button>
+            <button pButton class="ui-button-warning" label='Clear' (click)='reset()'></button></div>
+    </div> 
+
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table [value]="locationList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 10%; text-align: center">Code</th>
+                        <th style="width: 25%; text-align: left">Name</th>
+                        <th style="width: 20%; text-align: left">Address</th>
+                        <th style="width: 15%; text-align: left">Telephone</th>
+                        <th style="width: 10%; text-align: left">Fax</th>
+                        <th style="width: 10%; text-align: center">In-Active</th>
+                        <th style="width: 10%; text-align: center">Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-location>
+                    <tr>
+                        <td style="text-align: center">{{location.locationMasterLocationId}}</td>
+                        <td style="text-align: left">{{location.locationMasterLocationName}}</td>
+                        <td style="text-align: left">{{location.locationMasterLocationAddress}}</td>
+                        <td style="text-align: left">{{location.locationMasterLocationTelephone}}</td>
+                        <td style="text-align: left">{{location.locationMasterLocationFax}}</td>
+                        
+                        <td style="text-align: center; background-color: lightcoral;">
+                            <!-- {{country.countryMasterCountryStatus}}</td> -->
+                            
+                        
+                            <ng-container *ngIf="location.locationMasterLocationStatus === true">
+                                <input type="checkbox" class="geekmark" [checked]="true" [disabled]="true"  />
+                            </ng-container>
+                            <!-- <div class="container">
+                                <input type="checkbox" name="group2" id="checkbox-2">
+                                <label for="checkbox-2"><span class="checkbox">Apples</span></label>
+                              </div> -->
+                        
+                        
+                            <ng-container *ngIf="location.locationMasterLocationStatus === false">
+                                <input type="checkbox" class="geekmark" [checked]="false" [disabled]="true"/>
+                            </ng-container>
+                        </td>
+
+                        <td style="text-align: center">
+                            <button pButton type="button" icon="pi pi-pencil" (click)='updateValues(location)'
+                                iconPos="left"></button>
+                            <button pButton type="button" icon="pi pi-trash" (click)='removeLocation(location)'
+                                iconPos="left"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+
+
+        </div>
+    </div>
+</div>

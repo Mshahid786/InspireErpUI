@@ -1,0 +1,389 @@
+<app-page-header [nav]='[{label: "customer"| translate},{label: "customer quotation"| translate}]'
+    [title]='title| translate'></app-page-header>
+    <p-toolbar>
+        <div class="ui-toolbar-group-left">
+            <button pButton type="button" label="New" (click)='new()' icon="pi pi-plus"></button>
+            <button pButton type="button" label="Edit" (click)='edit()' [disabled]='!btnFlag.edit' icon="fa fa-pencil"
+                class="ui-button-success"></button>
+    
+            <button pButton type="button" class="ui-button-danger" [disabled]='!btnFlag.cancel' label="Cancel"
+                (click)="cancel()" icon="fa fa-ban"></button>
+            <button pButton type="button" [label]="btnFlag.save == true ? 'Save': 'Update'" (click)='savecustomerQuotation()'
+                icon="fa fa-floppy-o" class="ui-button-success"></button>
+    
+            <!-- <button pButton type="button" label="Find" icon="fa fa-search"></button> -->
+            <button pButton type="button" label="List" icon="fa fa-list" (click)="showMaximizableDialog()"
+                class="ui-button-info"></button>
+    
+            <button pButton type="button" class="ui-button-danger" (click)='delete()' [disabled]='!btnFlag.delete'
+                label="Delete" icon="fa fa-trash"></button>
+    
+    
+    
+        </div>
+    
+        <div class="ui-toolbar-group-right">
+            <!-- <button pButton type="button" icon="pi pi-search"></button>
+                <button pButton type="button" icon="pi pi-calendar" class="ui-button-success"></button>
+                <button pButton type="button" icon="pi pi-times" class="ui-button-danger"></button> -->
+            <!-- <div style="display: inline-block;" class="ui-inputgroup">
+    
+                <input type="text" pInputText [(ngModel)]='search' placeholder="Search">
+                <button pButton type="button" [disabled]='search != null && search.trim() != ""? false: true'
+                    (click)=GetSavedCustomerQuotationDetails(search) icon="pi pi-search"></button>
+            </div> -->
+    
+            <!-- <button pButton type="button" label="Print" icon="fa fa-print" class="ui-button-success"></button>
+    
+            <button pButton type="button" label="Exit" icon="fa fa-sign-out"></button>
+    
+            <p-checkbox label="Suppress Allocation in Print"></p-checkbox> -->
+        </div>
+    </p-toolbar>
+
+
+<div class="card card-w-title" [formGroup]='customerQuotationFormGroup'>
+    <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+        <p-tabPanel [header]="'Customer Quotation'| translate">
+            <div class="p-grid">
+                <div class="p-sm-12 p-md-12 p-lg-5">
+                    <p-panel>
+                        <p-header>
+                            {{'Customer Quotation'| translate}}
+                        </p-header>
+                        <div class="min-panel">
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-3"
+                                for="voucherno">{{'Quotation No'| translate}}</label>
+                            <div class="p-col-12 p-md-12 p-lg-4 p-1">
+                                <input class="w-100" formControlName='customerQuotationQuotationID' id="quotationno"
+                                    pInputText>
+                                <div class="error" *ngIf="f.customerQuotationQuotationID.errors">
+                                </div>
+                            </div>
+                            <p-message severity="error"
+                                *ngIf="f.customerQuotationQuotationID?.errors?.Exist && !btnFlag.update"
+                                text='Quotation No is exist'></p-message>
+
+                            </div>
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-3" for="invoicetype">{{'Invoice Type'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-4 p-1">
+                                    <p-dropdown class="w-100" formControlName='customerQuotationVoucherType'
+                                        [options]="invoiceList">
+                                    </p-dropdown>
+                                    <div class="error" *ngIf="f.customerQuotationVoucherType.errors 
+                                    && (f.customerQuotationVoucherType.dirty || f.customerQuotationVoucherType.touched)">
+                                        <span *ngIf="f.customerQuotationVoucherType.errors.required">
+                                            Invoice Type is Mandatory Field*</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-3" for="location">{{'Location'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-4 p-1">
+                                    <p-dropdown class="w-100" formControlName='customerQuotationLocation'
+                                        [options]="locationList">
+                                    </p-dropdown>
+                                    <div class="error" *ngIf="f.customerQuotationLocation.errors 
+                                    && (f.customerQuotationLocation.dirty || f.customerQuotationLocation.touched)">
+                                        <span *ngIf="f.customerQuotationLocation.errors.required">
+                                            Location is Mandatory Field*</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-3" for="location">{{'Customer Name'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-4 p-1">
+                                    <p-dropdown class="w-100" formControlName='customerQuotationCustomerID'  
+                                        [options]="customerList">
+                                    </p-dropdown>
+                                 </div>
+
+                            </div>
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-3" for="contact">{{'Contact Person'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-4 p-1"><input class="w-100"
+                                        formControlName='customerQuotationContactPersonV' style ="width: 165px;" id ="refno" pInputText>
+                                </div>
+                            </div>
+
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-3" for="location">{{'Sales Man'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-4 p-1">
+                                    <p-dropdown class="w-100" formControlName='customerQuotationSalesManID'
+                                        [options]="salesManList">
+                                    </p-dropdown>
+                                 </div>
+
+                            </div>
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-3" for="currency">{{'Currency'| translate}}</label>
+                                <!-- <input class="p-col-12 p-md-12 p-lg-4" id="account" pInputText> -->
+                                <div class="p-col-12 p-md-12 p-lg-4 p-1">
+                                    <p-dropdown class="w-100" formControlName='customerQuotationCurrencyID'
+                                        [options]="locationList">
+                                    </p-dropdown>
+                                    <div class="error" *ngIf="f.customerQuotationCurrencyID.errors 
+                                    && (f.customerQuotationCurrencyID.dirty || f.customerQuotationCurrencyID.touched)">
+                                        <span *ngIf="f.customerQuotationCurrencyID.errors.required">
+                                            Currency  is Mandatory Field*</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-2" for="contact">{{'Project Ref.'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-4 p-1"><input class="w-100"
+                                        formControlName='customerQuotationPacking' style ="width: 200px;" id ="refno" pInputText>
+                                </div>
+                            </div>
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-2" for="contact">{{'Project Name.'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-4 p-1"><input class="w-100"
+                                        formControlName='customerQuotationQuality' style ="width: 200px;" id ="refno" pInputText>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-2" for="location">{{'Equipment'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-6 p-1">
+                                    <p-dropdown class="w-100" formControlName='customerQuotationVendorID'
+                                        [options]="vendorList">
+                                    </p-dropdown>
+                                 </div>
+
+                            </div>
+
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-2" for="location">{{'Make'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-6 p-1">
+                                    <p-dropdown class="w-100" formControlName='customerQuotationTypeID'
+                                        [options]="typeList">
+                                    </p-dropdown>
+                                 </div>
+
+                            </div>
+
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-2" for="location">{{'Type'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-6 p-1">
+                                    <p-dropdown class="w-100" formControlName='customerQuotationModelID'
+                                        [options]="modelList">
+                                    </p-dropdown>
+                                 </div>
+
+                            </div> -->
+
+                            <div class="p-grid inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-3" 
+                                    for="narration">{{'Remarks'| translate}}</label>
+                                <div class="p-col-12 p-md-12 p-lg-8 p-1" >
+                                    <textarea class="w-100" formControlName='customerQuotationRemarks' style="margin:0px;width:350px;height:49px;" id="narration"
+                                        pInputText></textarea>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </p-panel>
+                </div>
+
+
+                <div class="p-sm-12 p-md-12 p-lg-7">
+                    <p-panel>
+                        <div class="p-grid inputGroup">
+                            <label class="p-col-12 p-md-12 p-lg-3"
+                                        for="quotedate">{{'Quatation Date'| translate}}</label>
+                                    <!-- <input class="p-col-12 p-md-12 p-lg-4" id="voucherdate" pInputText> -->
+                                    <div class="p-col-12 p-md-12 p-lg-3 p-1">
+                                        <p-calendar class="w-100" useUtc formControlName='customerQuotationDate'
+                                            id="quotationdate">
+                                        </p-calendar>
+        
+                                        <div class="error" *ngIf="f.customerQuotationDate.errors 
+                                        && (f.customerQuotationDate.dirty || f.customerQuotationDate.touched)">
+                                            <span *ngIf="f.customerQuotationDate.errors.required">
+                                                Quotation date is Mandatory Field*</span>
+                                        </div>
+                                    </div> 
+
+                                    <label class="p-col-12 p-md-12 p-lg-3"
+                                        for="Deliverydate">{{'Delivery Date Time'| translate}}</label>
+                                    <!-- <input class="p-col-12 p-md-12 p-lg-4" id="voucherdate" pInputText> -->
+                                    <div class="p-col-12 p-md-12 p-lg-3 p-1">
+                                        <p-calendar class="w-100" useUtc formControlName='customerQuotationDeliveryTime'
+                                            id="deliverydate">
+                                        </p-calendar>
+                                    </div> 
+
+
+                        </div>
+
+
+                        <!-- <div class="p-grid inputGroup">
+                            <label class="p-col-12 p-md-12 p-lg-3"
+                                        for="voucherdate">{{'Delivery Date Time'| translate}}</label>
+                                
+                                    <div class="p-col-12 p-md-12 p-lg-3 p-1">
+                                        <p-calendar class="w-100" useUtc formControlName='customerQuotationDeliveryTime'
+                                            id="deliverydate">
+                                        </p-calendar>
+                                    </div> 
+                        </div> -->
+
+                        
+                        <div class="p-grid inputGroup">
+                            <label class="p-col-12 p-md-12 p-lg-3"
+                                        for="quotevaliddate">{{'Quotation Valid Date'| translate}}</label>
+                                    <!-- <input class="p-col-12 p-md-12 p-lg-4" id="voucherdate" pInputText> -->
+                                    <div class="p-col-12 p-md-12 p-lg-3 p-1">
+                                        <p-calendar class="w-100" useUtc formControlName='customerQuotationQuotationValidDate'
+                                            id="qvaliddate">
+                                        </p-calendar>
+                                    </div> 
+                        </div>
+
+                        <!-- <div class="grid"> -->
+                            <p-panel [header]="'Create Template'| translate">  
+                                <div class="grid">
+
+                                    <p-tabView>
+                                        <p-tabPanel [header]="'Subject'| translate">
+                                        <textarea class="w-100" formControlName='customerQuotationSubject' style="margin:0px;width:663px;height:49px;" id="narration"
+                                        pInputText></textarea>
+                                    </p-tabPanel>
+
+                                    <p-tabPanel [header]="'Note'| translate">
+                                    <textarea class="w-100" formControlName='customerQuotationNote' style="margin:0px;width:663px;height:49px;" id="narration"
+                                    pInputText></textarea>
+                                    </p-tabPanel>
+                                    <p-tabPanel [header]="'Warranty'| translate">
+                                    <textarea class="w-100" formControlName='customerQuotationWarranty' style="margin:0px;width:663px;height:49px;" id="narration"
+                                    pInputText></textarea>
+                                    </p-tabPanel>
+                                    <p-tabPanel [header]="'Training'| translate">
+                                    <textarea class="w-100" formControlName='customerQuotationTraining' style="margin:0px;width:663px;height:49px;" id="narration"
+                                    pInputText></textarea>
+                                    </p-tabPanel>
+
+                                    <p-tabPanel [header]="'Technical Details'| translate">
+                                    <textarea class="w-100" formControlName='customerQuotationTechnicalDetails' style="margin:0px;width:663px;height:49px;" id="narration"
+                                    pInputText></textarea>
+                                    </p-tabPanel>
+                                    <p-tabPanel [header]="'Header'| translate">
+                                    <textarea class="w-100" formControlName='customerQuotationHeader' style="margin:0px;width:663px;height:49px;" id="narration"
+                                    pInputText></textarea>
+                                    </p-tabPanel>
+
+                                    <p-tabPanel [header]="'Footer'| translate">
+                                    <textarea class="w-100" formControlName='customerQuotationFooter' style="margin:0px;width:663px;height:49px;" id="narration"
+                                    pInputText></textarea>
+                                    </p-tabPanel>
+
+                                    <p-tabPanel [header]="'Terms'| translate">
+                                    <textarea class="w-100" formControlName='customerQuotationTerms' style="margin:0px;width:663px;height:49px;" id="narration"
+                                    pInputText></textarea>
+                                    </p-tabPanel>
+                                    </p-tabView>
+
+                                   
+                                </div>
+                            </p-panel>
+                        
+                        <!-- </div> -->
+                  </p-panel>
+                </div>
+
+            </div>
+
+            <div class="p-sm-12 p-md-12 p-lg-12">
+                <p-panel>
+                    <p-header>
+                        {{'Quatation Details'| translate}}
+                    </p-header>
+                    <div class="grid">
+                        <div class="p-col-12 tbl-maxheight">
+                            <div class="p-col-12 tbl-maxheight">
+                                <hot-table [hotId]="hotid" [licenseKey]="licensekey" [settings]="customerQuotationentry">
+                                </hot-table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </p-panel>
+            </div>
+                 
+                <div class="p-grid inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-1 " for="account">
+                        <b>{{'Grand Total'| translate}}</b>
+                    </label>
+                    <div class="p-col-12 p-md-12 p-lg-1">
+                     <input id="total" formControlName='customerQuotationAmount' pInputText>
+                    </div>
+                </div>
+
+        </p-tabPanel>
+
+    </p-tabView>
+</div>
+
+<p-dialog header="Customer Quotation List" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '90%'}"
+    [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <p-table #dt [value]="customerQuotationarry" [columns]="cols" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="caption">
+            <div style="text-align: right">
+                <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="Global Filter"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of cols" [pSortableColumn]="col.field">{{col.header|translate}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-custoquote>
+            <tr>
+                <td>{{custoquote.customerQuotationQuotationID}}</td>
+                <td>{{custoquote.customerQuotationVoucherType}}</td>
+              
+                <td *ngIf='custoquote?.customerQuotationLocationId != null'>{{getLocation(custoquote.customerQuotationLocationId)}}</td>
+                <td *ngIf='custoquote?.customerQuotationSalesManID != null'>{{getSalesMan(custoquote.customerQuotationSalesManID)}}</td>
+                <td *ngIf='custoquote?.customerQuotationCurrencyID != null'>{{getCurrency(custoquote.customerQuotationCurrencyID)}}</td>      
+                <td>{{custoquote.customerQuotationRemarks}}</td>        
+                <td>
+                    <button pButton type="button" icon="pi pi-pencil"
+                        (click)='GetSavedCustomerQuotationDetails(custoquote.customerQuotationQuotationID);displayMaximizable=false;'
+                        class="ui-button-info"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-dialog>
+
+<p-toast></p-toast>
+
+<p-confirmDialog key="confirm-key" acceptLabel="Yes" rejectLabel="No" header="Confirm"
+    [(visible)]="confirmDropDatabaseDialogVisible"></p-confirmDialog>

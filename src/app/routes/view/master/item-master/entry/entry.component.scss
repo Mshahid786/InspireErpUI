@@ -1,0 +1,66 @@
+.example-tree-invisible {
+    display: none;
+  }
+  
+  .example-tree ul,
+  .example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+ 
+  .inputGroup {
+    margin: 10px 0;
+  }
+
+  .w-100{
+    width: 100%;
+  }
+
+  .m-t-b-2 {
+    margin:2px 0px;
+    float: right;
+    cursor: pointer;
+  }
+
+  .tree {
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+.tbl-maxheight {
+
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+// .base-table {
+//   p-dropdown {
+//     .ui-dropdown {
+//       min-height: 0;
+//     }
+//   }
+// }
+
+// :host ::ng-deep .ui-table .ui-table-thead > tr > th {
+//   position: -webkit-sticky;
+//   position: sticky;
+//   top: 69px;
+//   box-shadow: 1px 3px 6px 0 rgba(32,33,36,0.10);
+// }
+
+// @media screen and (max-width: 64em) {
+//   :host ::ng-deep .ui-table .ui-table-thead > tr > th {
+//       top: 99px;
+//   }
+// }
+.inputGroup {
+  .ui-autocomplete .ui-autocomplete-input {
+    width: 90% !important;
+  }
+}
+
+.bg-gray {
+  background-color: #f1f1f1;
+}
+

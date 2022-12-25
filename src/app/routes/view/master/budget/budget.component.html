@@ -1,0 +1,50 @@
+<app-page-header [nav]='breadcumbmodel' [title]='title'></app-page-header>
+<div class="card card-w-title" [formGroup]='BudgetFormGroup'>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Budget Name</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Budget  Name" formControlName='budgetMasterBudgetName'>
+
+            <div class="error" *ngIf="f.budgetMasterBudgetName.errors 
+            && (f.budgetMasterBudgetName.dirty || f.budgetMasterBudgetName.touched)">
+                <span *ngIf="f.budgetMasterBudgetName.errors.required">
+                   Please Enter the Budget Name*</span>
+            </div>
+        </div>
+    </div>
+        <div class="p-grid">
+            <div class="p-col-12 p-md-12 p-lg-offset-1 p-lg-6">
+                <button pButton class="ui-button-info" [label]='btnlabel' (click)='saveBudget()'></button>
+                <button pButton class="ui-button-warning" label='Clear' (click)='reset()'></button></div>
+        </div> 
+   
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table [value]="BudgetList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Code</th>
+                        <th>Budget Name</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-Budget>
+                    <tr>
+                        <td>{{Budget.budgetMasterBudgetId}}</td>
+                        <td>{{Budget.budgetMasterBudgetName}}</td>
+                    
+                        <td>
+                            <button pButton type="button" icon="pi pi-pencil" (click)='updateValues(Budget)'
+                                iconPos="left"></button>
+                            <button pButton type="button" icon="pi pi-trash" (click)='removeBudget(Budget)'
+                                iconPos="left"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+
+
+        </div>
+    </div>
+</div>

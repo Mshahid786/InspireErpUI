@@ -1,0 +1,81 @@
+ <app-page-header [nav]='breadcumbmodel' [title]='title'></app-page-header>
+<div class="card card-w-title" [formGroup]='projectdescriptionFormGroup'>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1" style="width: 225px">Project Description Name</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="projectdescription Name" formControlName='projectDescriptionMasterProjectDescriptionName'>
+
+            <div class="error" *ngIf="f.projectDescriptionMasterProjectDescriptionName.errors 
+            && (f.projectDescriptionMasterProjectDescriptionName.dirty || f.projectDescriptionMasterProjectDescriptionName.touched)">
+                <span *ngIf="f.projectDescriptionMasterProjectDescriptionName.errors.required">
+                    Project Description Name is Mandatory Field*</span>
+            </div>
+
+        </div>
+   
+        <div class="p-col-12 p-md-12 p-lg-1">Sort Order</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText type="number" placeholder="Sort Order" formControlName='projectDescriptionMasterProjectDescriptionSortOrder'>
+            <div class="error" *ngIf="f.projectDescriptionMasterProjectDescriptionSortOrder.errors 
+            && (f.projectDescriptionMasterProjectDescriptionSortOrder.dirty || f.projectDescriptionMasterProjectDescriptionSortOrder.touched)">
+                <span *ngIf="f.projectDescriptionMasterProjectDescriptionSortOrder.errors.required">Rate is Mandatory Field*</span>
+            </div>
+        </div>
+    </div>
+
+  <div class="p-grid">
+    <!-- <div class="ui-g-12"><p-checkbox name="PDStatus" value="Status" label="Status" [binary]="true" formControlName='projectDescriptionMasterProjectDescriptionStatus' ></p-checkbox></div> -->
+    
+        <p-checkbox name="PDStatus" label="Status" [binary]="true"  
+        formControlName='projectDescriptionMasterProjectDescriptionStatus'
+       ></p-checkbox>
+  
+    </div>
+   
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-offset-1 p-lg-6">
+            <button pButton class="ui-button-info" [label]='btnlabel' (click)='saveprojectdescription()'></button>
+            <button pButton class="ui-button-warning" label='Clear' (click)='reset()'></button></div>
+    </div> 
+
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table [value]="projectdescriptionList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Code</th>
+                        <th> ProjectName</th>
+                        <th>Sort Order</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-projectdescription>
+                    <tr>
+                        <td>{{projectdescription.projectDescriptionMasterProjectDescriptionId}}</td>
+                        <td>{{projectdescription.projectDescriptionMasterProjectDescriptionName}}</td>
+                        <td>{{projectdescription.projectDescriptionMasterProjectDescriptionSortOrder}}</td>
+                        <td>
+                            <!-- {{projectdescription.projectDescriptionMasterProjectDescriptionStatus}} -->
+                            <ng-container *ngIf="projectdescription.projectDescriptionMasterProjectDescriptionStatus === true">
+                                <input type="checkbox" [checked]="true" [disabled]="true"  />
+                            </ng-container>
+                            <ng-container *ngIf="projectdescription.projectDescriptionMasterProjectDescriptionStatus === false">
+                                <input type="checkbox" [checked]="false" [disabled]="true" />
+                            </ng-container>
+                        </td>
+                        <td>
+                            <button pButton type="button" icon="pi pi-pencil" (click)='updateValues(projectdescription)'
+                                iconPos="left"></button>
+                            <button pButton type="button" icon="pi pi-trash" (click)='removeprojectdescription(projectdescription)'
+                                iconPos="left"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+
+
+        </div>
+    </div>
+</div>

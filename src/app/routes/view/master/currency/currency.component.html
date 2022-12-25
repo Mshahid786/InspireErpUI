@@ -1,0 +1,109 @@
+
+<app-page-header [nav]='[{label: "master"| translate},{label: "currency"| translate}]' [title]='title| translate'>
+    
+</app-page-header>
+<div class="card card-w-title" [formGroup]='currencyFormGroup'>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">{{'Currency Name'| translate}}</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText [placeholder]="'Currency Name'| translate" formControlName='currencyMasterCurrencyName'>
+
+            <div class="error" *ngIf="f.currencyMasterCurrencyName.errors 
+            && (f.currencyMasterCurrencyName.dirty || f.currencyMasterCurrencyName.touched)">
+                <span *ngIf="f.currencyMasterCurrencyName.errors.required">
+                    Currency Name is Mandatory Field*</span>
+            </div>
+
+        </div>
+   
+        <div class="p-col-12 p-md-12 p-lg-1">{{'Rate'|translate}}</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText type="number" [placeholder]="'Rate'| translate" formControlName='currencyMasterCurrencyRate'>
+            <div class="error" *ngIf="f.currencyMasterCurrencyRate.errors 
+            && (f.currencyMasterCurrencyRate.dirty || f.currencyMasterCurrencyRate.touched)">
+                <span *ngIf="f.currencyMasterCurrencyRate.errors.required">Rate is Mandatory Field*</span>
+            </div>
+        </div>
+    </div>
+
+  <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">{{'Denomination'| translate}}</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText [placeholder]="'Denomination'| translate" formControlName='currencyMasterCurrencyDenomination'>
+
+            <div class="error" *ngIf="f.currencyMasterCurrencyDenomination.errors 
+            && (f.currencyMasterCurrencyDenomination.dirty || f.currencyMasterCurrencyDenomination.touched)">
+                <span *ngIf="f.currencyMasterCurrencyDenomination.errors.required">Denomination is Mandatory
+                    Field*</span>
+            </div>
+
+        </div>
+    
+        <div class="p-col-12 p-md-12 p-lg-1">{{'Short Name' | translate}}</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText [placeholder]="'Short Name'| translate" formControlName='currencyMasterCurrencyShortName'>
+
+            <div class="error" *ngIf="f.currencyMasterCurrencyShortName.errors 
+            && (f.currencyMasterCurrencyShortName.dirty || f.currencyMasterCurrencyShortName.touched)">
+                <span *ngIf="f.currencyMasterCurrencyShortName.errors.required">Short Name is Mandatory
+                    Field*</span>
+            </div>
+
+        </div>
+    </div>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">{{'Symbol'| translate}}</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText [placeholder]="'Symbol'| translate" formControlName='currencyMasterCurrencySymbol'>
+            <div class="error" *ngIf="f.currencyMasterCurrencySymbol.errors 
+            && (f.currencyMasterCurrencySymbol.dirty || f.currencyMasterCurrencySymbol.touched)">
+                <span *ngIf="f.currencyMasterCurrencySymbol.errors.required">Symbol is Mandatory
+                    Field*</span>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-offset-1 p-lg-6">
+            <button pButton class="ui-button-info" [label]='btnlabel| translate' (click)='saveCurrency()'></button>
+            <button pButton class="ui-button-warning" [label]='"Clear"| translate' (click)='reset()'></button></div>
+    </div> 
+
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table [value]="currencyList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>{{'Code' | translate}}</th>
+                        <th>{{'Currency Name'| translate}}</th>
+                        <th>{{'Rate'| translate}}</th>
+                        <th>{{'Symbol'  | translate}}</th>
+                        <th>{{'Denomination'| translate}}</th>
+                        <th>{{'Short Name' | translate}}</th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-currency>
+                    <tr>
+                        <td>{{currency.currencyMasterCurrencyId}}</td>
+                        <td>{{currency.currencyMasterCurrencyName}}</td>
+                        <td>{{currency.currencyMasterCurrencyRate}}</td>
+                        <td>{{currency.currencyMasterCurrencySymbol}}</td>
+                        <td>{{currency.currencyMasterCurrencyDenomination}}</td>
+                        <td>{{currency.currencyMasterCurrencyShortName}}</td>
+                        <td>
+                            <button pButton type="button" icon="pi pi-pencil" (click)='updateValues(currency)'
+                                iconPos="left"></button>
+                            <button pButton type="button" icon="pi pi-trash" (click)='removeCurrency(currency)'
+                                iconPos="left"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+
+
+        </div>
+    </div>
+</div>

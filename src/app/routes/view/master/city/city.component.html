@@ -1,0 +1,94 @@
+<app-page-header [nav]='breadcumbmodel' [title]='title'></app-page-header>
+<div class="card card-w-title" [formGroup]='cityFormGroup'>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Country</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+           
+
+        
+            <!-- <p-dropdown [options]="countryList" formControlName='cityMasterCityCountryId' filter="true">
+                <ng-template let-item pTemplate>
+                    
+                    {{item.countryMasterCountryName}}
+                </ng-template>
+                <ng-template let-country pTemplate>
+                    <div class="ui-helper-clearfix">
+                         
+                       {{country.countryMasterCountryName}}
+                    </div>
+                </ng-template>
+            </p-dropdown> -->
+
+            
+            <p-dropdown [options]="countryListNew"  
+             formControlName='cityMasterCityCountryId'  [filter]="true"></p-dropdown>
+
+             <!-- <p-dropdown [options]="countryListNew" 
+            formControlName="cityMasterCityCountryId" [filter]="true" >
+            <ng-template let-item pTemplate>
+                
+                {{item.countryMasterCountryName}}
+            </ng-template>
+            <ng-template let-country pTemplate>
+                
+                     
+                   {{country.countryMasterCountryName}}
+              
+            </ng-template>
+            </p-dropdown>  -->
+
+            
+          
+            
+
+
+
+        </div>
+   
+        <div class="p-col-12 p-md-12 p-lg-1">City Name</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText  placeholder="Address" formControlName='cityMasterCityName'>
+            <div class="error" *ngIf="f.cityMasterCityName.errors 
+            && (f.cityMasterCityName.dirty || f.cityMasterCityName.touched)">
+                <span *ngIf="f.cityMasterCityName.errors.required">City name is Mandatory Field*</span>
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-offset-1 p-lg-6">
+            <button pButton class="ui-button-info" [label]='btnlabel' (click)='saveCity()'></button>
+            <button pButton class="ui-button-warning" label='Clear' (click)='reset()'></button></div>
+    </div> 
+
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table [value]="cityList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-city>
+                    <tr>
+                        <td>{{city.cityMasterCityId}}</td>
+                        <td>{{city.cityMasterCityName}}</td>
+                        
+                        <td>
+                            <button pButton type="button" icon="pi pi-pencil" (click)='updateValues(city)'
+                                iconPos="left"></button>
+                            <button pButton type="button" icon="pi pi-trash" (click)='removeCity(city)'
+                                iconPos="left"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+
+
+        </div>
+    </div>
+</div>

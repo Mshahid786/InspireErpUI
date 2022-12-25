@@ -1,0 +1,41 @@
+.inputGroup {
+    margin: 4px 0;
+}
+
+.w-100{
+    width: 100%;
+}
+.p-0{
+    padding: 0;
+}
+.grid {
+    max-height: 500px;
+    overflow:  auto;
+}
+
+.f-r {
+    float: right;
+}
+
+.min-panel {
+    min-height: 106px !important;
+}
+
+:host ::ng-deep .ui-table .ui-table-thead > tr > th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: -8px;
+    box-shadow: 1px 3px 6px 0 rgba(32,33,36,0.10);
+}
+
+@media screen and (max-width: 64em) {
+    :host ::ng-deep .ui-table .ui-table-thead > tr > th {
+        top: -8px;
+    }
+}
+
+.handsontable {
+    max-width: 1500px !important;
+    overflow: none !important;
+    margin: 0px !important;
+}

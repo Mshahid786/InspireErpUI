@@ -1,0 +1,66 @@
+<app-page-header [nav]='breadcumbmodel' [title]='title'></app-page-header>
+<div class="card card-w-title" [formGroup]='salesmanFormGroup'>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Salesman Name</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Salesman Name" formControlName='salesManMasterSalesManName'>
+
+            <div class="error" *ngIf="f.salesManMasterSalesManName.errors 
+            && (f.salesManMasterSalesManName.dirty || f.salesManMasterSalesManName.touched)">
+                <span *ngIf="f.salesManMasterSalesManName.errors.required">
+                    Location Name is Mandatory Field*</span>
+            </div>
+
+        </div>
+   
+        <div class="p-col-12 p-md-12 p-lg-1">Contact No</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText  placeholder="Contact No" formControlName='salesManMasterSalesManContactNo'>
+            <!-- <div class="error" *ngIf="f.salesManMasterSalesManContactNo.errors 
+            && (f.salesManMasterSalesManContactNo.dirty || f.salesManMasterSalesManContactNo.touched)">
+                <span *ngIf="f.salesManMasterSalesManContactNo.errors.required">Address is Mandatory Field*</span>
+            </div> -->
+        </div>
+
+        <!-- <div class="p-col-8 p-md-8 p-lg-1"style="width:65px">In-Active</div>
+        <div class="p-col-8 p-md-8 p-lg-1">
+            <p-checkbox [formControl]="salesmanFormGroup.controls['locationMasterLocationStatus']" [binary]="true" style="height: 18px;width: 18px;">  </p-checkbox>
+        </div> -->
+    </div>
+
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-offset-1 p-lg-6">
+            <button pButton class="ui-button-info" [label]='btnlabel' (click)='saveSalesman()'></button>
+            <button pButton class="ui-button-warning" label='Clear' (click)='reset()'></button></div>
+    </div> 
+
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table [value]="salesmanList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 10%; text-align: center">Code</th>
+                        <th style="width: 60%; text-align: left">Name</th>
+                        <th style="width: 20%; text-align: left">Contact No</th>
+                        <th style="width: 10%; text-align: center">Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-salesman>
+                    <tr>
+                        <td style="text-align: center">{{salesman.salesManMasterSalesManId}}</td>
+                        <td style="text-align: left">{{salesman.salesManMasterSalesManName}}</td>
+                        <td style="text-align: left">{{salesman.salesManMasterSalesManContactNo}}</td>
+                        
+                        
+                        <td style="text-align: center">
+                            <button pButton type="button" icon="pi pi-pencil" (click)='updateValues(salesman)'
+                                iconPos="left"></button>
+                            <button pButton type="button" icon="pi pi-trash" (click)='removeSalesman(salesman)'
+                                iconPos="left"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

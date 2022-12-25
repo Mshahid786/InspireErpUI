@@ -1,0 +1,75 @@
+<app-page-header [nav]='breadcumbmodel' [title]='title'></app-page-header>
+
+<div class="card card-w-title" [formGroup]='departmentFormGroup'>
+     <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Code</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText  placeholder="Code" formControlName='departmentMasterDepartmentCode'>
+
+            <div class="error" *ngIf="f.departmentMasterDepartmentCode.errors 
+            && (f.departmentMasterDepartmentCode.dirty || f.departmentMasterDepartmentCode.touched)">
+                <span *ngIf="f.departmentMasterDepartmentCode.errors.required">
+                    Code is Mandatory Field*</span>
+            </div>
+
+            <p-checkbox [binary]="true" formControlName="departmentMasterDepartmentStatus" >Status</p-checkbox>
+
+        </div>
+   
+    
+    </div> 
+
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Department</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Department" formControlName='departmentMasterDepartmentName'>
+
+            <div class="error" *ngIf="f.departmentMasterDepartmentName.errors 
+            && (f.departmentMasterDepartmentName.dirty || f.departmentMasterDepartmentName.touched)">
+                <span *ngIf="f.departmentMasterDepartmentName.errors.required">
+                    Department Name is Mandatory Field*</span>
+            </div>
+
+        </div>
+   
+    
+    </div>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-offset-1 p-lg-6">
+            <button pButton class="ui-button-info" [label]='btnlabel' (click)='saveDepartment()'></button>
+            <button pButton class="ui-button-warning" label='Clear' (click)='reset()'></button></div>
+    </div> 
+
+
+   
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table [value]="departmentList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Code</th>
+                        <th>Department</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-department>
+                    <tr>
+                        <td>{{department.departmentMasterDepartmentCode}}</td>
+                        <td>{{department.departmentMasterDepartmentName}}</td>
+                        
+                        <td>
+                            <button pButton type="button" icon="pi pi-pencil" (click)='updateValues(department)'
+                                iconPos="left"></button>
+                            <button pButton type="button" icon="pi pi-trash" (click)='removeDepartment(department)'
+                                iconPos="left"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,235 @@
+<app-page-header [nav]='breadcumbmodel' [title]='title'></app-page-header>
+<div class="card card-w-title" [formGroup]='supplierFormGroup'>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Supplier Name</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Supplier Name"  style="width: 215px;"    formControlName='SuppliersMasterSupplierName'>
+
+            <div class="error" *ngIf="f.SuppliersMasterSupplierName.errors 
+            && (f.SuppliersMasterSupplierName.dirty || f.SuppliersMasterSupplierName.touched)">
+                <span *ngIf="f.SuppliersMasterSupplierName.errors.required">
+                    Supplier Name is Mandatory Field*</span>
+            </div>
+
+        </div>
+   
+        <div class="p-col-12 p-md-12 p-lg-1" style ="width:125px">Ref Accounts No. </div>
+            <div class="p-col-12 p-md-12 p-lg-2">
+                <input pInputText  placeholder="RefAccNo" style ="width:215px" formControlName='SuppliersMasterSupplierReffAcNo'>
+            </div>
+        <!-- <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText type="number" placeholder="Rate" formControlName='SupplierMasterRefAccNO'>
+            <div class="error" *ngIf="f.SupplierMasterRefAccNO.errors 
+            && (f.SupplierMasterRefAccNO.dirty || f.SupplierMasterRefAccNO.touched)">
+                <span *ngIf="f.SupplierMasterRefAccNO.errors.required">Ref. Account No. is Mandatory Field*</span>
+            </div>
+        </div> -->
+
+        <div class="p-col-12 p-md-12 p-lg-1">Contact Person</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="ContactPerson"  style="width: 215px;"  formControlName='SuppliersMasterSupplierContactPerson'>
+
+            <!-- <div class="error" *ngIf="f.SupplierMasterContactPerson.errors 
+            && (f.SupplierMasterContactPerson.dirty || f.SupplierMasterContactPerson.touched)">
+                <span *ngIf="f.SupplierMasterContactPerson.errors.required">Denomination is Mandatory
+                    Field*</span>
+            </div> -->
+
+        </div>
+    </div>
+
+  <div class="p-grid">
+        <!-- <div class="p-col-12 p-md-12 p-lg-1">Contact Person</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="ContactPerson"  formControlName='SuppliersMasterSupplierContactPerson'>
+
+       </div> -->
+    
+        <div class="p-col-12 p-md-12 p-lg-1" >Location</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Location" style="width: 215px;"  formControlName='SuppliersMasterSupplierLocation'>
+
+            <div class="error" *ngIf="f.SuppliersMasterSupplierLocation.errors 
+            && (f.SuppliersMasterSupplierLocation.dirty || f.SuppliersMasterSupplierLocation.touched)">
+                <span *ngIf="f.SuppliersMasterSupplierLocation.errors.required">Location Name is Mandatory
+                    Field*</span>
+            </div>
+
+        </div>
+
+
+
+        <div class="p-col-12 p-md-12 p-lg-1" style ="width:125px">PO Box</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="POBox"  style ="width:215px"formControlName='SuppliersMasterSupplierPoBox'>
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-1">Email </div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Email" style ="width:215px" formControlName='SuppliersMasterSupplierEmail'>
+        </div>
+
+
+    </div>
+
+    <div class="p-grid">
+
+        <!-- <select (change)="countryChange($event)" > -->
+            <div class="p-col-12 p-md-12 p-lg-1">Country</div>
+            <div class="p-col-12 p-md-12 p-lg-2"  >
+                <p-dropdown [options]="countryListNew"  (onChange)="onCountryChange($event)"
+                 formControlName='cityMasterCityCountryId'  [filter]="true"></p-dropdown>
+            </div>
+        <!-- </select>    -->
+
+        <div class="p-col-12 p-md-12 p-lg-1" style ="width:125px">City</div>
+        <div class="p-col-12 p-md-12 p-lg-2" >
+            <p-dropdown [options]="citylistNew"  
+             formControlName='cityMasterCityCityId'  [filter]="true"></p-dropdown>
+        </div>
+
+
+        <div class="p-col-12 p-md-12 p-lg-1" >Currency</div>
+        <div class="p-col-12 p-md-12 p-lg-2" >
+            <p-dropdown [options]="currencylistNew"  
+             formControlName='CurrencyMasterCurrencyId'  [filter]="true"></p-dropdown>
+        </div>
+
+    </div>
+
+
+
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Telephone1</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Tel1"  style="width: 215px;" formControlName='SuppliersMasterSupplierTel1'>
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-1" style ="width:125px">Telephone2</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Tel2" style ="width:215px" formControlName='SuppliersMasterSupplierTel2'>
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-1">Mobile</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Mobile"  style="width: 215px;"  formControlName='SuppliersMasterSupplierMobile'>
+        </div>
+
+
+    </div>
+
+    <div class="p-grid">
+        <!-- <div class="p-col-12 p-md-12 p-lg-1">Mobile</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Mobile" formControlName='SuppliersMasterSupplierMobile'>
+        </div> -->
+
+        <div class="p-col-12 p-md-12 p-lg-1" >Fax </div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Fax"   style="width: 215px;"  formControlName='SuppliersMasterSupplierFax'>
+        </div>
+
+
+        <div class="p-col-12 p-md-12 p-lg-1" style ="width:125px">Web Site </div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Website" style ="width:215px" formControlName='SuppliersMasterSupplierWebSite'>
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-1" >Vat No </div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="VatNo"  style ="width:215px" formControlName='SuppliersMasterSupplierVatNo'>
+        </div>
+
+    </div>
+
+    <!-- <div class="p-grid">
+
+
+
+    </div> -->
+
+
+  
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Remarks </div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <textarea rows="3" cols="30" pInputTextarea  pInputText placeholder="Remarks" style ="width:215px" formControlName='SuppliersMasterSupplierRemarks'>Remarks </textarea>
+          </div>
+
+          <div class="p-col-12 p-md-12 p-lg-1" style ="width:125px">Payment Terms</div>
+          <div class="p-col-12 p-md-12 p-lg-2" >
+              <textarea rows="3" cols="30" pInputTextarea  pInputText placeholder="PaymentsTerms" style ="width:215px" formControlName='SuppliersMasterSupplierPaymentTerms'>Payment Terms </textarea>
+          </div>
+
+          <!-- <div class="ui-g-12"> -->
+            <div class="p-col-12 p-md-12 p-lg-1" > </div>
+            <div class="p-col-12 p-md-12 p-lg-2" >
+            <p-checkbox name="PDStatus" label="Status" [binary]="true" 
+            formControlName='suppliersMasterSupplierStatus'
+              ></p-checkbox></div>
+
+    </div>
+    
+    <!-- <div class="p-grid"  style ="width:525px">
+        <div class="ui-g-12">
+            <p-checkbox name="PDStatus" label="Status" [binary]="true" 
+            formControlName='suppliersMasterSupplierStatus'
+              ></p-checkbox></div>
+      </div> -->
+
+
+
+    <!-- <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Payment Terms</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <textarea rows="5" cols="30" pInputTextarea  pInputText placeholder="PaymentsTerms" style ="width:490px" formControlName='SuppliersMasterSupplierPaymentTerms'>Payment Terms </textarea>
+        </div>
+
+    </div> -->
+
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-offset-1 p-lg-6">
+            <button pButton class="ui-button-info" [label]='btnlabel' (click)='saveSupplier()'></button>
+            <button pButton class="ui-button-warning" label='Clear' (click)='reset()'></button>
+        </div>
+    </div> 
+
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table [value]="SupplierList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-Supplier>
+                    <tr>
+                        <td>{{Supplier.suppliersMasterSupplierId}}</td>
+                        <td>{{Supplier.suppliersMasterSupplierName}}</td>
+                        <td>{{Supplier.suppliersMasterSupplierMobile}}</td>
+                        <!-- <td>{{Supplier.suppliersMasterSupplierStatus}}</td> -->
+                        <td>
+                        <ng-container *ngIf="Supplier.suppliersMasterSupplierStatus === true">
+                            <input type="checkbox" [checked]="true" [disabled]="true"  />
+                        </ng-container>
+                        <ng-container *ngIf="Supplier.suppliersMasterSupplierStatus === false">
+                            <input type="checkbox" [checked]="false" [disabled]="true" />
+                        </ng-container>
+                        </td>
+                        <td>
+                            <button pButton type="button" icon="pi pi-pencil" (click)='updateValues(Supplier)'
+                                iconPos="left"></button>
+                            <button pButton type="button" icon="pi pi-trash" (click)='removeSupplier(Supplier)'
+                                iconPos="left"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+        </div>
+    </div>
+</div>

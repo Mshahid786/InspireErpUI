@@ -1,0 +1,271 @@
+<app-page-header [nav]='breadcumbmodel' [title]='title'></app-page-header>
+
+<div class="card card-w-title">
+    <div class="p-grid">
+        <div class="p-col-2 tree">
+
+            <p-tree [value]="files" (onNodeSelect)='getItemData($event)' onNodeUnselect='getItemData($event)' selectionMode="single" 
+                [(selection)]="selectedFile" [metaKeySelection]="true" (onContextMenuSelect)="contextMenuSelection($event.node, cm)"
+                 [contextMenu]="cm" (onNodeExpand)="loadNode($event)" [filter]="true">
+            </p-tree>
+
+            <p-contextMenu #cm [model]="items"></p-contextMenu>
+        </div>
+        <div class="p-col-10">
+
+            <p-panel>
+                <p-header>
+                    Search
+                </p-header>
+                <div>
+                    <div class="p-grid p-align-center inputGroup">
+                        <label class="p-col-12 p-md-12 p-lg-1" for="findItem">Find Item</label>
+                        <input class="p-col-12 p-md-12 p-lg-3" id="findItem" pInputText>
+                    </div>
+                    <div class="p-grid p-align-center inputGroup">
+                        <label class="p-col-12 p-md-12 p-lg-1" for="findGroup">Find Group</label>
+                        <input class="p-col-12 p-md-12 p-lg-3" id="findGroup" pInputText>
+                    </div>
+                    <div class="p-grid p-align-center inputGroup">
+                        <div class="p-col-12 p-md-12 p-lg-offset-1 p-lg-6">
+                            <button pButton class="ui-button-info btn-margin-auto" [label]='"Search"'></button>
+                        </div>
+
+                    </div>
+                </div>
+            </p-panel>
+
+            <p-panel>
+                <p-header>
+                    <div class="ui-toolbar-group-left">
+                        Deails
+                    </div>
+                </p-header>
+                <div class="p-grid">
+                    <div class="p-col-6">
+                        <div class="p-grid inputGroup">
+
+                            <label class="p-col-12 p-md-12 p-lg-2" for="groupname">Group Name</label>
+                            <input class="p-col-12 p-md-12 p-lg-10" id="groupname" pInputText>
+                         
+
+                        </div>
+                        <div class="p-grid inputGroup">
+                            <label class="p-col-12 p-md-12 p-lg-2" for="matcode">Material Code</label>
+                            <input class="p-col-12 p-md-12 p-lg-10" id="matcode" pInputText>
+                         
+                        </div>
+
+                        <div class="p-grid inputGroup">
+                            <label class="p-col-12 p-md-12 p-lg-2" for="description">Item Desc.</label>
+                            <textarea class="p-col-12 p-md-12 p-lg-10" id="description" pInputText></textarea>
+
+                        </div>
+
+                        <div class="p-grid inputGroup">
+                            <label class="p-col-12 p-md-12 p-lg-2" for="brand">Brand</label>
+                            <p-autoComplete class="p-col-12 p-md-12 p-lg-10 p-0" [suggestions]="brandList" field="label"
+                             (completeMethod)="search($event)"></p-autoComplete>
+
+                        </div>
+
+                        <div class="p-grid inputGroup" *ngIf="ItemStockList.length > 0">
+                            <label class="p-col-12 p-md-12 p-lg-2" for="stockType">Stock Type</label>
+                            <p-dropdown class="p-col-12 p-md-12 p-lg-10 p-0"  appendTo='body' [options]="ItemStockList">
+                            </p-dropdown>
+
+                        </div>
+
+                        <div class="p-grid">
+
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="partno">Part No</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="partno" pInputText>
+
+                            </div>
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="reorder">Re-order Level</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="reorder" pInputText>
+
+                            </div>
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="itemsize">Item Size</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="itemsize" pInputText>
+
+                            </div>
+
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="shape">Shape</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="shape" pInputText>
+
+                            </div>
+
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="color">Color</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="color" pInputText>
+
+                            </div>
+
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="ref1">Ref1</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="ref1" pInputText>
+
+                            </div>
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="packing">Packing</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="packing" pInputText>
+
+                            </div>
+
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="ref2">Ref2</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="ref2" pInputText>
+
+                            </div>
+
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="weight">Weight</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="weight" pInputText>
+
+                            </div>
+
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="unitprice">Unit Price</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="unitprice" pInputText>
+
+                            </div>
+
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="barcode">Barcode</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="barcode" pInputText>
+
+                            </div>
+
+                            <div class="p-grid p-col-6 inputGroup">
+                                <label class="p-col-12 p-md-12 p-lg-4" for="supplucode">Supply Code</label>
+                                <input class="p-col-12 p-md-12 p-lg-7" id="supplucode" pInputText>
+
+                            </div>
+
+
+                        </div>
+                        <div class="p-grid inputGroup">
+                            <label class="p-col-12 p-md-12 p-lg-2" for="entryperson">Entry Person</label>
+                            <input class="p-col-12 p-md-12 p-lg-7" id="entryperson" pInputText>
+
+                        </div>
+                    </div>
+
+                    <div class="p-col-6">
+                        <p-panel>
+                            <p-header>
+                                Price Level Details
+                            </p-header>
+                            <div class="p-grid">
+
+                                <div class="p-col-12 tbl-maxheight">
+                                    <div class="p-col-12 tbl-maxheight">
+                                        <hot-table [hotId]="hotidPriceTbl" [licenseKey]="licensekey"
+                                            [settings]="priceTableSettings"></hot-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </p-panel>
+
+
+
+                    </div>
+
+                    <div class="p-col-6">
+                        <p-panel>
+                            <p-header>
+                                Unit Details
+                            </p-header>
+                            <div class="p-grid">
+
+                                <div class="p-col-12 tbl-maxheight">
+                                    <hot-table [hotId]="hotidUnitTbl" [licenseKey]="licensekey"
+                                        [settings]="unitTableSettings"></hot-table>
+                                </div>
+
+                            </div>
+                        </p-panel>
+
+
+                    </div>
+
+                    <div class="p-col-6">
+                        <p-panel>
+                            <p-header>
+                                Supplier Details
+                            </p-header>
+                            <div class="p-grid">
+
+                                <div class="p-col-12 tbl-maxheight">
+                                    <p-table>
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>Supplier</th>
+                                                <th>Purchase Date</th>
+                                                <th>Rate</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-elemnt>
+                                            <tr>
+                        
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+
+                            </div>
+                        </p-panel>
+
+                    </div>
+                </div>
+            </p-panel>
+
+
+
+        </div>
+    </div>
+    <div>
+        <p-dialog header="Item Group" [style]="{width: '30vw'}" [modal]="true" [formGroup]='itemMasterGrpFormGroup'
+         [(visible)]="displayBasic">
+            <div class="p-grid">
+                <div class="p-grid p-col-12 inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-4" for="weight">Parent Group</label>
+                    <p-dropdown class="p-col-12 p-md-12 p-lg-7" [options]="parentGroup" formControlName='itemMasterAccountNo'>
+                    </p-dropdown>
+                    
+
+                </div>
+
+                <div class="p-grid p-col-12 inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-4" for="weight">Group Name</label>
+                    <input class="p-col-12 p-md-12 p-lg-7" formControlName='itemMasterItemName' id="weight" pInputText>
+
+                </div>
+
+                <div class="p-grid p-col-12 inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-4" for="weight">Credit A/c</label>
+                    <p-dropdown class="p-col-12 p-md-12 p-lg-7" formControlName='itemMasterGroupCreditAcc' appendTo='body' [options]="accountList">
+                    </p-dropdown>
+                </div>
+
+                <div class="p-grid p-col-12 inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-4" for="weight">Debit A/c</label>
+                    <p-dropdown class="p-col-12 p-md-12 p-lg-7" formControlName='itemMasterGroupDebitAcc'  appendTo='body' [options]="accountList">
+                    </p-dropdown>
+
+                </div>
+            </div>
+            <p-footer>
+                <button type="button" pButton icon="pi pi-plus" (click)="displayBasic=false" label="New"></button>
+                <button type="button" pButton icon="pi pi-times" (click)="displayBasic=false" label="Edit"
+                    class="ui-button-secondary"></button>
+                <button type="button" pButton icon="pi pi-check" (click)="displayBasic=false;saveGroup()" label="Save"
+                    class="ui-button-secondary"></button>
+            </p-footer>
+        </p-dialog>
+        <p-toast></p-toast>

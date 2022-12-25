@@ -1,0 +1,75 @@
+<app-page-header [nav]='breadcumbmodel' [title]='title'></app-page-header>
+<div class="card card-w-title" [formGroup]='businesstypeFormGroup'>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-1">Business Type Name</div>
+        <div class="p-col-12 p-md-12 p-lg-2">
+            <input pInputText placeholder="Business Type Name" formControlName='businessTypeMasterBusinessTypeName'>
+
+            <div class="error" *ngIf="f.businessTypeMasterBusinessTypeName.errors 
+            && (f.businessTypeMasterBusinessTypeName.dirty || f.businessTypeMasterBusinessTypeName.touched)">
+                <span *ngIf="f.businessTypeMasterBusinessTypeName.errors.required">
+                    Business Type Name is Mandatory Field*</span>
+            </div>
+
+        </div>
+   
+       
+    </div>
+
+  <div class="p-grid">
+    <div class="ui-g-12">
+        <p-checkbox name="PDStatus" label="Status" [binary]="true" 
+        formControlName='businessTypeMasterBusinessTypeStatus'
+          ></p-checkbox></div>
+  </div>
+   
+    <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-offset-1 p-lg-6">
+            <button pButton class="ui-button-info" [label]='btnlabel' (click)='savebusinesstype()'></button>
+            <button pButton class="ui-button-warning" label='Clear' (click)='reset()'></button></div>
+    </div> 
+
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table [value]="businesstypeList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Business Type Name</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-businesstype>
+                    <tr>
+                        <td>{{businesstype.businessTypeMasterBusinessTypeId}}</td>
+                        <td>{{businesstype.businessTypeMasterBusinessTypeName}}</td>
+                        <td>
+                                <ng-container *ngIf="businesstype.businessTypeMasterBusinessTypeStatus === true">
+                                <input type="checkbox" [checked]="true" [disabled]="true"  />
+                            </ng-container>
+                            <ng-container *ngIf="businesstype.businessTypeMasterBusinessTypeStatus === false">
+                                <input type="checkbox" [checked]="false" [disabled]="true" />
+                            </ng-container>
+                
+                            <!-- <p-checkbox [(ngModel)]="checked" [disabled]="true"></p-checkbox> -->
+                             <!-- <p-checkbox [binary]="true" 
+                            [value]="true">
+                        </p-checkbox> -->
+                           <!-- {{businesstype.businessTypeMasterBusinessTypeStatus}} -->
+                        </td>
+                        <td>
+                            <button pButton type="button" icon="pi pi-pencil" (click)='updateValues(businesstype)'
+                                iconPos="left"></button>
+                            <button pButton type="button" icon="pi pi-trash" (click)='removebusinesstype(businesstype)'
+                                iconPos="left"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+
+
+        </div>
+    </div>
+</div>

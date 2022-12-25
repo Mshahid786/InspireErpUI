@@ -1,0 +1,297 @@
+<app-page-header [title]='title| translate'></app-page-header>
+<p-toolbar>
+    <div class="ui-toolbar-group-left">
+        <button pButton type="button" label="New" icon="pi pi-plus"></button>
+        <button pButton type="button" label="Edit" [disabled]='!btnFlag.edit' icon="fa fa-pencil"
+            class="ui-button-success"></button>
+
+        <button pButton type="button" class="ui-button-danger" [disabled]='!btnFlag.cancel' label="Cancel"
+            icon="fa fa-ban"></button>
+        <button pButton type="button" [label]="btnFlag.save == true ? 'Save': 'Update'" icon="fa fa-floppy-o"
+         (click)='saveItem()'   class="ui-button-success"></button>
+
+        <!-- <button pButton type="button" label="Find" icon="fa fa-search"></button> -->
+        <button pButton type="button" label="List" icon="fa fa-list" routerLink="/master/item/list"
+            class="ui-button-info"></button>
+
+        <button pButton type="button" class="ui-button-danger" [disabled]='!btnFlag.delete' label="Delete"
+            icon="fa fa-trash"></button>
+
+
+
+    </div>
+
+    <div class="ui-toolbar-group-right">
+        <!-- <button pButton type="button" icon="pi pi-search"></button>
+            <button pButton type="button" icon="pi pi-calendar" class="ui-button-success"></button>
+            <button pButton type="button" icon="pi pi-times" class="ui-button-danger"></button> -->
+
+        <button pButton type="button" label="Back" routerLink='/master/item/list' icon="fa fa-sign-out"></button>
+
+    </div>
+</p-toolbar>
+{{newitemForm.value | json}}
+<div class="card card-w-title" [formGroup]= 'newitemForm'>
+    <div class="p-grid">
+        <div class="p-col-4">
+            <div class="p-grid inputGroup">
+                <label class="p-col-12 p-md-12 p-lg-3" for="groupname">Group </label>
+                <div class="p-col-12 p-md-12 p-lg-9 p-0">
+                    <p-dropdown class="w-100" [options]="itemGroup" formControlName='itemMasterAccountNo'>
+                    </p-dropdown>
+                </div>
+
+            </div>
+            <div class="p-grid inputGroup">
+                <label class="p-col-12 p-md-12 p-lg-3" for="matcode">Brand</label>
+                <div class="p-col-12 p-md-12 p-lg-9 p-0 autoComplete-drop">
+                    <p-autoComplete [suggestions]="brandList" [dropdown]="true" field="label" formControlName='itemMasterVenderId'
+                    (completeMethod)="search($event)"></p-autoComplete>
+                </div>
+               
+            </div>
+
+            <div class="p-grid inputGroup" *ngIf="ItemStockList.length > 0">
+                <label class="p-col-12 p-md-12 p-lg-3" for="stockType">Stock Type</label>
+                <div class="p-col-12 p-md-12 p-lg-9 p-0 autoComplete-drop">
+                    <p-dropdown  appendTo='body' formControlName='itemMasterItemType' [options]="ItemStockList">
+                    </p-dropdown>
+                </div>
+             
+
+            </div>
+
+            <div class="p-grid inputGroup">
+                <label class="p-col-12 p-md-12 p-lg-3" for="description">Supplier</label>
+                <div class="p-col-12 p-md-12 p-lg-9 p-0 autoComplete-drop">
+                    <p-autoComplete  [suggestions]="supplierMasterList" formControlName='itemMasterSuplierCode'
+                     [dropdown]="true" field="label"
+                    (completeMethod)="searchBySupplier($event)"></p-autoComplete>
+                </div>
+            </div>
+
+            <div class="p-grid inputGroup">
+                <label class="p-col-12 p-md-12 p-lg-3" for="brand">Item</label>
+                <div class="p-col-12 p-md-12 p-lg-9 p-0 ">
+                    <textarea class="w-100" (keyup)="onKeyUp($event.target.value)" formControlName='itemMasterItemName' id="materialcode" pInputText></textarea>
+                </div>
+
+            </div>
+
+            <div class="p-grid inputGroup">
+                <label class="p-col-12 p-md-12 p-lg-3" for="brand">Arabic Name</label>
+                <input class="p-col-12 p-md-12 p-lg-9" id="brand" pInputText>
+
+            </div>
+
+        </div>
+        <div class="p-col-2">
+            <div class="p-grid p-align-end">
+                <div class="p-col-12">
+                    <img [src]='url != null? url : "../../../../../../assets/components/images/item.png"' height="175">
+                    <input type='file' (change)="onSelectFile($event)">
+                </div>
+
+            </div>
+        </div>
+        <div class="p-col-3 bg-gray">
+            <p-panel>
+                <p-header>
+                    Item Details
+                </p-header>
+                <div class="tbl-maxheight">
+                    <p-table [value]='itemTableData| async'>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>ID</th>
+                                <th>Item Name</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-elemnt>
+                            <tr>
+                               <td>{{elemnt.itemMasterItemId}}</td>
+                               <td>{{elemnt.itemMasterItemName}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+              
+            </p-panel>
+         
+        </div>
+
+        <div class="p-col-12 p-grid">
+            <div class="p-grid p-col-4">
+                <div class="p-grid p-col-6 inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="materialcode">Material Code</label>
+                    <input class="p-col-12 p-md-12 p-lg-6" id="materialcode" formControlName='itemMasterSuplierCode' pInputText>
+
+                </div>
+
+                <div class="p-grid p-col-6 inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="partno">Part No</label>
+                    <input class="p-col-12 p-md-12 p-lg-6" id="partno" formControlName='itemMasterPartNo'  pInputText>
+
+                </div>
+
+                <div class="p-grid p-col-6  inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="reorder">Re-order Level</label>
+                    <input class="p-col-12 p-md-12 p-lg-6" id="reorder" formControlName='itemMasterReOrderLevel' pInputText>
+                </div>
+                <div class="p-grid p-col-6  inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="itemsize">Item Size</label>
+                    <input class="p-col-12 p-md-12 p-lg-6" id="itemsize" formControlName='itemMasterItemSize' pInputText>
+
+                </div>
+                <div class="p-grid p-col-6  inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="color">Color</label>
+                    <input class="p-col-12 p-md-12 p-lg-6" id="color" formControlName='itemMasterColor' pInputText>
+
+                </div>
+
+                <div class="p-grid p-col-6  inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="shape">Shape</label>
+                    <input class="p-col-12 p-md-12 p-lg-6" id="shape" formControlName='itemMasterShape' pInputText>
+
+                </div>
+
+                <div class="p-grid p-col-6  inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="packing">Packing</label>
+                    <input class="p-col-12 p-md-12 p-lg-6" id="packing" formControlName='itemMasterPacking' pInputText>
+
+                </div>
+
+                <div class="p-grid p-col-6  inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="ref2">Ref2</label>
+                    <input class="p-col-12 p-md-12 p-lg-6" id="ref2" formControlName='itemMasterRef2' pInputText>
+
+                </div>
+                <div class="p-grid p-col-12 inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-3" for="entryperson">Entry Person</label>
+                    <input class="p-col-12 p-md-12 p-lg-9" id="entryperson" formControlName='itemMasterUserId' pInputText>
+
+                </div>
+
+                <div class="p-grid p-col-6  inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="lcost">Landing cost</label>
+                    <input class="p-col-12 p-md-12 p-lg-6" id="lcost" formControlName='itemMasterLandingCost' pInputText>
+
+                </div>
+
+                <div class="p-grid p-col-6  inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="stock">Stock</label>
+                    <div style="background-color: red;" class="p-col-12 p-md-12 p-lg-6"  id="stock"></div>
+
+                </div>
+
+                <div class="p-grid p-col-6  inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-6" for="VAT">VAT%</label>
+                    <div class="p-col-12 p-md-12 p-lg-6">
+                        <input class="w-100" id="VAT" formControlName='itemMasterVat' pInputText>
+                    </div>
+
+
+                </div>
+
+                <div class="p-grid p-col-6  inputGroup">
+                    <div class="p-grid p-align-center">
+                        <p-checkbox class="p-col-12" label='Inclusive Tax'> </p-checkbox>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="p-col-4">
+                <p-panel>
+                    <p-header>
+                        Price Level Details
+                    </p-header>
+                    <div class="p-grid">
+
+                        <div class="p-col-12 tbl-maxheight">
+                            <hot-table [hotId]="hotidPriceTbl" [licenseKey]="licensekey"
+                                [settings]="priceTableSettings">
+                            </hot-table>
+                        </div>
+                    </div>
+                </p-panel>
+
+
+            </div>
+
+            <div class="p-col-4">
+                <p-panel>
+                    <p-header>
+                        Supplier Details
+                    </p-header>
+                    <div class="p-grid">
+
+                        <div class="p-col-12 bg-gray">
+
+                            <!-- <hot-table [hotId]="hotidSupplierTbl" [licenseKey]="licensekey"
+                                [settings]="supplierTableSettings"></hot-table> -->
+                            <div class="tbl-maxheight">
+                                <p-table [value]='supplierList'>
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th>Supplier</th>
+                                            <th>Purchase Date</th>
+                                            <th>Rate</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-elemnt>
+                                        <tr>
+                                            <td>
+                                                {{elemnt.supplierId}}::{{elemnt.supplier}}
+                                            </td>
+                                            <td>
+                                                {{elemnt.purchaseDate| date}}
+                                              </td>
+                                              <td>
+                                                {{elemnt.rate}}
+                                              </td>
+                                         
+                                        </tr>
+
+                                     
+                                          
+                                      
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                              
+
+
+                        </div>
+
+                    </div>
+                </p-panel>
+            </div>
+        </div>
+
+        <div class="p-col-12">
+            <p-panel>
+                <p-header>
+                    Unit Details
+                </p-header>
+                <div class="p-grid">
+
+                    <div class="p-col-12 tbl-maxheight">
+                        <div class="p-col-12 tbl-maxheight">
+                            <hot-table [hotId]="hotidUnitTbl" [licenseKey]="licensekey" [settings]="unitTableSettings">
+                            </hot-table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </p-panel>
+
+
+        </div>
+
+
+
+    </div>
+
+</div>
