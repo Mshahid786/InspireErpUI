@@ -4,14 +4,14 @@ import {HttpClientModule, HTTP_INTERCEPTORS, HttpClient} from '@angular/common/h
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginationModule} from '@angular/material/paginator';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MattInputModule} from '@angular/material/input';
-import {MatSelectModulo} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDatepicker} from '@angular/material/MatDatepicker';
-
+// import {MatTableModule} from '@angular/material/table';
+// import {MatPaginationModule} from '@angular/material/paginator';
+// import {MatFormFieldModule} from '@angular/material/form-field';
+// import {MattInputModule} from '@angular/material/input';
+// import {MatSelectModulo} from '@angular/material/select';
+// import {MatButtonModule} from '@angular/material/button';
+// import {MatDatepicker} from '@angular/material/MatDatepicker';
+// import  {MatNativeDataModule} from '@angular/material/core';
 
 
 // Application Components

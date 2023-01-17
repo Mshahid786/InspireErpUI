@@ -85,38 +85,15 @@
     </div>
 </div>
 
-
-<div class="card card-w-title">
-    <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+ <div class="card card-w-title">
+     <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
         <p-tabPanel [header]="'Details'| translate">
             <div class="grid">
                 <div class="p-col-12">
-                     <hot-table [hotId]="hotid" [data]=" dataset" [licenseKey]="licensekey" [settings]="VoucherPrinting"></hot-table> -->
-                    
-                </div>
+                    <hot-table [hotId]="hotid" [licenseKey]="licensekey" [settings]="VoucherPrinting"></hot-table>
+                 </div>
             </div>
         </p-tabPanel>
     </p-tabView>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

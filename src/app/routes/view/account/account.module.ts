@@ -10,8 +10,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReceiptvoucherComponent } from './receiptvoucher/receiptvoucher.component';
 import { JournalinvoiceComponent } from './journalinvoice/journalinvoice.component';
 import { VoucherPrintingComponent } from './voucher-printing/voucher-printing.component';
+import { BalanceSheetComponent } from './BalanceSheet/Balance-Sheet.component';
+import { AccountStatmentComponent } from './StatementOfAccounts/accountstatment.component';
+import { StatementOfAccountSummaryService } from 'src/app/service/statement-of-account-summary.service';
 @NgModule({
-  declarations: [PaymentvoucherComponent, ReceiptvoucherComponent, JournalinvoiceComponent, VoucherPrintingComponent],
+  declarations: [PaymentvoucherComponent, ReceiptvoucherComponent, JournalinvoiceComponent, VoucherPrintingComponent,BalanceSheetComponent,AccountStatmentComponent],
   imports: [
     CommonModule,
     AccountRoutingModule,

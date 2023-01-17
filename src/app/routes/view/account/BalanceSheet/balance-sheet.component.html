@@ -1,0 +1,98 @@
+<div class='matero-page-header'>
+    <div class="matero-page-header-inner">
+        <h2 class="matero-page-title">{{title}}</h2>
+    </div>
+</div>
+<p-toolbar>
+    <div class="ui-toolbar-group-left">
+        <button pButton type="button" label="Show" icon="fa fa-search" class="ui-button-info"></button>
+        <button pButton type="button" label="Exit" icon="fa fa-sign-out" class="ui-button-danger"></button>
+        <button pButton type="button" label="Excel" icon="fa fa-file-excel-o" class="ui-button-success"></button>
+    </div>
+    <div class="ui-toolbar-group-right">
+        <button pButton type="button" label="Print" icon="fa fa-print" class="ui-button-success"></button>
+        <div style="display: inline-block;" class="ui-inputgroup">
+            <input type="text" pInputText placeholder="Search">
+            <button pButton type="button" icon="pi pi-search"></button>
+        </div>
+    </div>
+</p-toolbar>
+<div class="card card-w-title" [formGroup]='BForm'>
+    <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+        <p-tabPanel [header]="' Balance Sheet' | translate">
+            <div class="p-grid">
+
+                <div class="p-col-6 p-md-6 p-lg-6">
+                    <p-panel>
+                        <div class="p-grid">
+                            <div class="p-col-10 p-md-10 p-lg-10">
+                                <p-checkbox label="By Date"></p-checkbox>
+                            </div>
+                            <div class="p-col-4 p-md-4 p-lg-4">
+                                <label for="Balancesheet">
+                                    <b>{{'Financial Period Start Date:' | translate}}</b>
+                                </label>
+                            </div>
+                            <div class="p-col-8 p-md-8 p-lg-8">
+                                <p-calendar useUtc formControlName='DateFrom' class="w-100">
+                                </p-calendar>
+                                <div class="error" *ngIf="f.DateFrom.touched && f.DateFrom.invalid">
+                                    <span>Date From is Mandatory Field*</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-grid">
+                            <div class="p-col-4 p-md-4 p-lg-4">
+                                <label for="Balancesheet">
+                                    <b>{{'Financial Period End Date:' | translate}}</b>
+                                </label>
+                            </div>
+                            <div class="p-col-8 p-md-8 p-lg-8">
+                                <p-calendar useUtc formControlName='DateTo' class="w-100">
+                                </p-calendar>
+                                <div class="error" *ngIf="f.DateTo.touched && f.DateTo.invalid">
+                                    <span>Date To is Mandatory Field*</span>
+                                </div>
+                            </div>
+                        </div>
+                    </p-panel>
+                </div>
+                <div class="p-col-4 p-md-4 p-lg-4">
+                    <p-panel>
+                        <p-header>
+                            Type
+                        </p-header>
+                        <div class="p-grid">
+                            <div class="p-col-4">
+                                <p-radioButton name="particularVoucher" inputId="dateRange" value="dateRange">
+                                </p-radioButton>
+                                <label for="particularVoucher">Summary View</label>
+                            </div>
+                            <div class="p-col-4">
+                                <p-radioButton name="particularVoucher" inputId="dateRange" value="dateRange">
+                                </p-radioButton>
+                                <label for="particularVoucher">Detailed View</label>
+                            </div>
+                        </div>
+                        <div class="p-col-10 p-md-10 p-lg-10">
+                            <p-checkbox label="Hide Zero Balance"></p-checkbox>
+                        </div>
+                    </p-panel>
+                </div>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+    <div class="card card-w-title">
+        <p-tabView [activeIndex]="index" (onChange)="handleChange($event)">
+            <p-tabPanel [header]="'Balance Sheet' | translate">
+                <div class="grid">
+                    <div class="p-col-12">
+                        <hot-table [hotId]="hotid" [data]=" dataset" [licenseKey]="licensekey"
+                            [settings]="BalanceSheet">
+                        </hot-table>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>

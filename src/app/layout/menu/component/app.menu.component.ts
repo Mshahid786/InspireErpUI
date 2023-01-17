@@ -202,6 +202,8 @@ export class AppMenuComponent implements OnInit {
                       {label: 'Journal Invoice', icon: 'fa fa-fw fa-sign-in', routerLink: ['/account/journalinvoice']},
                       {label: 'Purchase Journal Voucher', icon: 'fa fa-fw fa-sign-in', routerLink: ['/utils']},
                       {label: 'Voucher Printing', icon: 'fa fa-fw fa-print', routerLink: ['/account/voucherprinting']},
+                      {label: 'Balance Sheet', icon: 'fa fa-fw fa-print', routerLink: ['/account/BalanceSheet']},
+                      {label: 'Statement Of Account', icon: 'fa fa-fw fa-print', routerLink: ['/account/accountstatement']},
                       {label: 'Reports', icon: 'fa fa-fw fa-sign-in',
                       items: [
                                 {label: 'General Accounts Statement', icon: 'fa fa-fw fa-sign-in', routerLink: ['/utils']},
@@ -218,6 +220,7 @@ export class AppMenuComponent implements OnInit {
                                 {label: 'Cash Book', icon: 'fa fa-fw fa-sign-in', routerLink: ['/utils']},
                                 {label: 'Asset Purchase List', icon: 'fa fa-fw fa-sign-in', routerLink: ['/utils']},
                                 {label: 'Voucher Printing', icon: 'fa fa-fw fa-sign-in', routerLink: ['/utils']},
+                                
                                 {label: 'VAT Statement', icon: 'fa fa-fw fa-sign-in', routerLink: ['/utils']}
                               ]},
                         {label: 'Bank Receipt Voucher', icon: 'fa fa-fw fa-sign-in', routerLink: ['/utils']},

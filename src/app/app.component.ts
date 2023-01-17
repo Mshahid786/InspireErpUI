@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { MenuService } from './layout/menu/service/app.menu.service';
 import { SettingsService } from './shared/service/settings.service';
 import {VoucherPrintingServiceService} from './service/voucher-printing-service.service';
-
+// import {BalanceSheetService} from './service/balance-sheet.service';
+// import {ProfitAndLossService} from './service/profit-and-loss.service';
+// import {StatementOfAccountDetailService} from './service/statement-of-account-detail.service';
+// import {StatementOfAccountSummaryService} from './service/statement-of-account-summary.service';
 
 @Component({
     selector: 'app-root',
@@ -27,7 +30,9 @@ export class AppComponent {
 
     menuHoverActive: boolean;
     Vouchers:any;
-    constructor(private menuService: MenuService, private settings: SettingsService,private VP : VoucherPrintingServiceService) {
+    constructor(private menuService: MenuService, private settings: SettingsService,private VP : VoucherPrintingServiceService
+        // ,Bs : BalanceSheetService,PL : ProfitAndLossService,SAD : StatementOfAccountDetailService, SAS : StatementOfAccountSummaryService
+        ) {
         
         this.menuMode = settings.getOptions().menuMode;
         this.menuActive = settings.getOptions().menuActive;

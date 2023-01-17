@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PaymentvoucherComponent } from './paymentvoucher/paymentvoucher.component';
 import { VoucherPrintingComponent } from './voucher-printing/voucher-printing.component';
+import { AccountStatmentComponent } from './StatementOfAccounts/accountstatment.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,11 @@ const routes: Routes = [
 {
   path: 'voucherprinting',
   component: VoucherPrintingComponent,
+  data: { title: 'Journal Invoice', titleI18n: 'Journal Invoice' }
+},
+{
+  path: 'accountstatement',
+  component: AccountStatmentComponent,
   data: { title: 'Journal Invoice', titleI18n: 'Journal Invoice' }
 }
 

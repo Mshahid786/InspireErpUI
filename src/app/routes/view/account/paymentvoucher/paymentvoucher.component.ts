@@ -543,14 +543,15 @@ updateFormGrid(pymt: PaymentVoucher) {
 
   this.accountTransactionList = pymt.accountsTransactions;
     // this.jobArray.find(j => j.jobMasterJobName.trim()  === k.jobname.trim()).jobMasterId,
-  const gridData: GridData[] = pymt.paymentVoucherDetails.map(k => {
-    const accountId: string = k.paymentVoucherDetailsAcNo != null ? this.acctArry.find(l => l.match(k.paymentVoucherDetailsAcNo)) : null;
-    const  jobId: string = (k.paymentVoucherDetailsJobId != null ) ? this.jobArry.find(l =>
-                         l.match(k.paymentVoucherDetailsJobId.toString())) : null;
+  const gridData: GridData[] = pymt.paymentVoucherDetails.map(k => 
+    {
+    //const accountId: string = k.paymentVoucherDetailsAcNo != null ? this.acctArry.find(l => l.match(k.paymentVoucherDetailsAcNo)) : null;
+    //const  jobId: string = (k.paymentVoucherDetailsJobId != null ) ? this.jobArry.find(l =>
+      //                   l.match(k.paymentVoucherDetailsJobId.toString())) : null;
     return {
-                  account: accountId,
+                  //account: accountId,
                   debit: k.paymentVoucherDetailsDbAmount,
-                  jobname: jobId,
+                  //jobname: jobId,
                   costcenter: null,
                   narration: k.paymentVoucherDetailsNarration,
                   id: k.paymentVoucherDetailsId
